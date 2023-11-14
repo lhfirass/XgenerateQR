@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate You QR code</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            user-select: none;
+        }
+        body {
+            background-color: #222222;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+        }
+        .miniProject {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            background-color: #f3f3f3;
+            border: none;
+            border-radius: 10px;
+        }
+        .header {
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 4px;
+            border: none;
+            border-radius: 4px;
+            box-shadow: 0 4px 4px 0px #22222224;
+            outline: 2px solid #0568a8;
+        }
+        button {
+            width: 100%;
+            padding: 4px;
+            background-color: #0568a8;
+            border: none;
+            border-radius: 4px;
+            box-shadow: 0 4px 4px 0 #22222228;
+            color: #f3f3f3;
+            font-weight: bold;
+            transition: .3s;
+            cursor: pointer;
+        }
+        button:hover {
+            box-shadow: 0 4px 0 0 #0d8add;
+        }
+        #imageBox {
+            align-self: center;
+        }
+        #qrImage {
+            transition: max-height 1s;
+        }
+        #imageBox.showQrcode {
+            max-height: 300px;
+        }
+        footer {
+            position: absolute;
+            bottom: 4px;
+            color: #f3f3f3;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>   
+    <div class="miniProject">
+        <p class="header">QR Code generator by FPIXELS</p>
+        <input type="text" id="qrText" placeholder="Enter Text Here">
+
+        <div id="imageBox">
+            <img src="" id="qrImage">
+        </div>
+
+        <button id="gen" onclick="genQR()">Generate QR Code</button>
+    </div>
+    <footer>
+        <p>copyright © FPIXELS</p>
+    </footer>
+    <script>
+        let imageBox = document.getElementById('imageBox');
+        let qrImage = document.getElementById('qrImage');
+        let qrText = document.getElementById('qrText');
+        let genBtn = document.getElementById('gen');
+
+        
+        function genQR() {
+            qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + qrText.value;
+            qrImage.style.margin = "8px 0";
+            imageBox.classList.add('showQrcode');
+            qrText.value = "";
+        }
+    </script>
+</body>
+</html>
